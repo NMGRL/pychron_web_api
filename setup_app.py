@@ -1,5 +1,5 @@
 # ===============================================================================
-# Copyright 2015 Jake Ross
+# Copyright 2016 Jake Ross
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,17 +16,26 @@
 
 # ============= enthought library imports =======================
 # ============= standard library imports ========================
-# ============= local library imports  ==========================
 from flask import render_template
+# ============= local library imports  ==========================
 
-# from application import app
-# from blueprints.v0_docs import docs
-# from api.v0_api import create_api
-#
-# app.register_blueprint(docs)
-# create_api(app)
+from application import app
+from blueprints.v0_docs import docs
+from api.v0_api import create_api
+
+app.register_blueprint(docs)
+create_api(app)
 
 
+@app.route('/')
+def index():
+    return render_template('index.html')
 
 
+@app.route('/api_info')
+def api_info():
+    return render_template('api_info.html')
 # ============= EOF =============================================
+
+
+

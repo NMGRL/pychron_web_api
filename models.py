@@ -19,7 +19,7 @@
 # ============= local library imports  ==========================
 from flask.ext.sqlalchemy import SQLAlchemy
 
-from app import app
+from application import app
 db = SQLAlchemy(app)
 
 

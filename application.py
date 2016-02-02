@@ -16,17 +16,22 @@
 
 # ============= enthought library imports =======================
 # ============= standard library imports ========================
+from flask import Flask
 # ============= local library imports  ==========================
-from flask import render_template
+from os import getenv
 
-# from application import app
-# from blueprints.v0_docs import docs
-# from api.v0_api import create_api
-#
-# app.register_blueprint(docs)
-# create_api(app)
+app = Flask('pychron_web_api')
 
 
+user = getenv('ARGONSERVER_DB_USER')
+pwd = getenv('ARGONSERVER_DB_PWD')
+host = getenv('ARGONSERVER_HOST')
+name = 'pychrondvc'
 
+uri = 'mysql+pymysql://{}:{}@{}/{}?connect_timeout=3'.format(user, pwd, host, name)
+app.config['SQLALCHEMY_DATABASE_URI'] = uri
 
 # ============= EOF =============================================
+
+
+

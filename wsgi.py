@@ -1,5 +1,5 @@
 # ===============================================================================
-# Copyright 2015 Jake Ross
+# Copyright 2016 Jake Ross
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,22 +16,11 @@
 
 # ============= enthought library imports =======================
 # ============= standard library imports ========================
-from flask import Flask
 # ============= local library imports  ==========================
-from os import getenv
 
-app = Flask('flask_pychron')
+from setup_app import *
 
 
-user = getenv('ARGONSERVER_DB_USER')
-pwd = getenv('ARGONSERVER_DB_PWD')
-host = getenv('ARGONSERVER_HOST')
-
-name = 'pychrondvc'
-
-uri = 'mysql+pymysql://{}:{}@{}/{}?connect_timeout=3'.format(user, pwd, host, name)
-app.config['SQLALCHEMY_DATABASE_URI'] = uri
+if __name__ == "__main__":
+    app.run()
 # ============= EOF =============================================
-
-
-
