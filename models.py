@@ -20,6 +20,7 @@
 from flask.ext.sqlalchemy import SQLAlchemy
 
 from application import app
+
 db = SQLAlchemy(app)
 
 
@@ -33,7 +34,8 @@ class AnalysisTbl(db.Model):
     aliquot = db.Column(db.Integer)
     increment = db.Column(db.Integer)
 
-    irradiation_positionID = db.Column(db.Integer)
+    irradiation_positionID = db.Column(db.Integer, db.ForeignKey('IrradiationPositionTbl.id'))
+    iposition = db.relationship('IrradiationPositionTbl', backref=db.backref('analyses', lazy='dynamic'))
 
     measurementName = db.Column(db.String(45))
     extractionName = db.Column(db.String(45))
@@ -54,16 +56,17 @@ class AnalysisTbl(db.Model):
     # measured_position = relationship('MeasuredPositionTbl', uselist=False, backref='analysis')
 
 
-# class Person(db.Model):
-#     id = db.db.Column(db.db.Integer, primary_key=True)
-#     first_name = db.db.Column(db.Text)
-#     last_name = db.db.Column(db.Text)
-
-
-# db.create_all()
+class IrradiationPositionTbl(db.Model):
+    __tablename__ = 'IrradiationPositionTbl'
+    id = db.Column(db.Integer, primary_key=True)
+    identifier = db.Column(db.String(80))
+    sampleID = db.Column(db.Integer)
+    levelID = db.Column(db.Integer)
+    position = db.Column(db.Integer)
+    note = db.Column(db.BLOB)
+    weight = db.Column(db.Float)
+    j = db.Column(db.Float)
+    j_err = db.Column(db.Float)
 
 
 # ============= EOF =============================================
-
-
-

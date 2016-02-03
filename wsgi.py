@@ -16,11 +16,12 @@
 
 # ============= enthought library imports =======================
 # ============= standard library imports ========================
+from os import getenv
 # ============= local library imports  ==========================
 
 from setup_app import *
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=getenv('FLASK_DEBUG'))
 # ============= EOF =============================================

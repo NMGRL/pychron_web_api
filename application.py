@@ -22,11 +22,17 @@ from os import getenv
 
 app = Flask('pychron_web_api')
 
-
-user = getenv('ARGONSERVER_DB_USER')
-pwd = getenv('ARGONSERVER_DB_PWD')
-host = getenv('ARGONSERVER_HOST')
-name = 'pychrondvc'
+use_local = int(getenv('USE_LOCAL', 0))
+if use_local:
+    user = getenv('LOCALHOST_DB_USER')
+    pwd = getenv('LOCALHOST_DB_PWD')
+    host = 'localhost'
+    name = 'pychrondvc_dev'
+else:
+    user = getenv('ARGONSERVER_DB_USER')
+    pwd = getenv('ARGONSERVER_DB_PWD')
+    host = getenv('ARGONSERVER_HOST')
+    name = 'pychrondvc'
 
 uri = 'mysql+pymysql://{}:{}@{}/{}?connect_timeout=3'.format(user, pwd, host, name)
 app.config['SQLALCHEMY_DATABASE_URI'] = uri
