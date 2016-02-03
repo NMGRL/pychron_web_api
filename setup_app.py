@@ -27,12 +27,12 @@ app.register_blueprint(docs)
 create_api(app)
 
 
-@app.route('/')
+@app.route('/api/')
 def index():
     return render_template('index.html')
 
 
-@app.route('/api_info')
+@app.route('/api/info')
 def api_info():
     return render_template('api_info.html')
 # ============= EOF =============================================
