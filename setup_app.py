@@ -26,10 +26,14 @@ from api.v0_api import create_api
 app.register_blueprint(docs)
 create_api(app)
 
-
-@app.route('/api/')
+@app.route('/')
 def index():
     return render_template('index.html')
+
+
+@app.route('/api/')
+def api():
+    return render_template('api.html')
 
 
 @app.route('/api/info')
