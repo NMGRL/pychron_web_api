@@ -61,12 +61,40 @@ class IrradiationPositionTbl(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     identifier = db.Column(db.String(80))
     sampleID = db.Column(db.Integer)
-    levelID = db.Column(db.Integer)
+    levelID = db.Column(db.Integer, db.ForeignKey('LevelTbl.id'))
     position = db.Column(db.Integer)
     note = db.Column(db.BLOB)
     weight = db.Column(db.Float)
     j = db.Column(db.Float)
     j_err = db.Column(db.Float)
+
+
+class IrradiationTbl(db.Model):
+    __tablename__ = 'IrradiationTbl'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80))
+    levels = db.relationship('LevelTbl', backref='irradiation')
+
+
+class LevelTbl(db.Model):
+    __tablename__ = 'LevelTbl'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80))
+    irradiationID = db.Column(db.Integer, db.ForeignKey('IrradiationTbl.id'))
+    productionID = db.Column(db.Integer, db.ForeignKey('ProductionTbl.id'))
+    holder = db.Column(db.String(45))
+    z = db.Column(db.Float)
+
+    positions = db.relationship('IrradiationPositionTbl', backref='level')
+
+    note = db.Column(db.BLOB)
+
+
+class ProductionTbl(db.Model):
+    __tablename__ = 'ProductionTbl'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80))
+    levels = db.relationship('LevelTbl', backref='production')
 
 
 # ============= EOF =============================================

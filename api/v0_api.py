@@ -19,21 +19,20 @@
 from flask.ext.restless import APIManager
 
 # ============= local library imports  ==========================
-from models import db, AnalysisTbl, IrradiationPositionTbl
+from models import db, AnalysisTbl, IrradiationPositionTbl, IrradiationTbl, LevelTbl, ProductionTbl
 
 
 def create_api(app):
     prefix = '/api/v0'
 
     api_manager = APIManager(app, flask_sqlalchemy_db=db)
-    api_manager.create_api(AnalysisTbl,
-                           collection_name='analyses',
-                           url_prefix=prefix,
-                           methods=['GET'])
 
-    api_manager.create_api(IrradiationPositionTbl,
-                           collection_name='iposition',
-                           url_prefix=prefix,
-                           methods=['GET'])
+    api = ((AnalysisTbl, 'analysis', {'methods': ['GET']}),
+           (IrradiationPositionTbl, 'iposition', {'methods': ['GET']}),
+           (IrradiationTbl, 'irradiation', {'methods': ['GET']}),
+           (LevelTbl, 'level',  {'methods': ['GET']}),
+           (ProductionTbl, 'production',  {'methods': ['GET']}))
+    for table, cname, kw in api:
+        api_manager.create_api(table, collection_name=cname, url_prefix=prefix,  **kw)
 
 # ============= EOF =============================================

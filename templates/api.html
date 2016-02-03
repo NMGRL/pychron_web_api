@@ -21,7 +21,7 @@ Pychron offers a public api for accessing the database. <a href="/api/info">API<
         </p>
         <p>
             Using Browser <br/>
-            <a href='/api/v0/analyses?q={"limit":2}'> /api/v0/analyses?q={"limit":2} </a>
+            <a href='/api/v0/analysis?q={"limit":2}'> /api/v0/analysis?q={"limit":2} </a>
         </p>
         <p>
             Using Python <br/>
@@ -30,7 +30,7 @@ Pychron offers a public api for accessing the database. <a href="/api/info">API<
 import requests
 import json
 
-url = 'http://&lt;host&gt;/api/v0/analyses'
+url = 'http://&lt;host&gt;/api/v0/analysis'
 headers = {'Content-Type': 'application/json'}
 
 params = dict(q=json.dumps(dict(limit=2)))
@@ -50,8 +50,8 @@ print response.json()
         </p>
         <p>
             Using Browser<br/>
-            <a href=/api/v0/analyses?q={"filters":[{"name":"id","op":"eq","val":3}]}>
-            /api/v0/analyses?q={"filters":[{"name":"id","op":"eq","val":3}]}</a>
+            <a href=/api/v0/analysis?q={"filters":[{"name":"id","op":"eq","val":3}]}>
+            /api/v0/analysis?q={"filters":[{"name":"id","op":"eq","val":3}]}</a>
         </p>
 
         <p>
@@ -61,7 +61,7 @@ print response.json()
 import requests
 import json
 
-url = 'http://&lt;host&gt;/api/v0/analyses'
+url = 'http://&lt;host&gt;/api/v0/analysis'
 headers = {'Content-Type': 'application/json'}
 filters = [{'name':'id', 'op':'eq', 'val': 3}]
 params = dict(q=json.dumps(dict(filters=filters)))
@@ -82,8 +82,8 @@ print response.json()
         </p>
         <p>
             Using Browser<br/>
-            <a href=/api/v0/analyses?q={"filters":[{"name":"iposition__identifier","op":"has","val":"23966"}]}>
-            /api/v0/analyses?q={"filters":[{"name":"iposition__identifier","op":"has","val":"23966"}]}</a>
+            <a href=/api/v0/analysis?q={"filters":[{"name":"iposition__identifier","op":"has","val":"23966"}]}>
+            /api/v0/analysis?q={"filters":[{"name":"iposition__identifier","op":"has","val":"23966"}]}</a>
         </p>
         <p>
             Using Python <br/>
@@ -92,7 +92,7 @@ print response.json()
 import requests
 import json
 
-url = 'http://&lt;host&gt;/api/v0/analyses'
+url = 'http://&lt;host&gt;/api/v0/analysis'
 headers = {'Content-Type': 'application/json'}
 filters = [{'name':'iposition_identifier', 'op':'has', 'val': '23966'}]
 params = dict(q=json.dumps(dict(filters=filters)))
