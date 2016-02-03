@@ -23,5 +23,5 @@ from setup_app import *
 
 
 if __name__ == "__main__":
-    app.run(debug=getenv('FLASK_DEBUG'))
+    app.run(debug=int(getenv('FLASK_DEBUG', 0)))
 # ============= EOF =============================================

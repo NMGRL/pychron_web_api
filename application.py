@@ -20,7 +20,15 @@ from flask import Flask
 # ============= local library imports  ==========================
 from os import getenv
 
-app = Flask('pychron_web_api')
+
+class PychronWebAPIApp(Flask):
+    def __init__(self, *args, **kw):
+        super(PychronWebAPIApp, self).__init__(*args, **kw)
+
+        self.jinja_options = dict(Flask.jinja_options)
+        self.jinja_options['extensions'] = ['jinja2_highlight.HighlightExtension']
+
+app = PychronWebAPIApp('pychron_web_api')
 
 use_local = int(getenv('USE_LOCAL', 0))
 if use_local:
@@ -38,6 +46,3 @@ uri = 'mysql+pymysql://{}:{}@{}/{}?connect_timeout=3'.format(user, pwd, host, na
 app.config['SQLALCHEMY_DATABASE_URI'] = uri
 
 # ============= EOF =============================================
-
-
-
