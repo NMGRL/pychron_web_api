@@ -42,7 +42,7 @@ else:
     host = getenv('ARGONSERVER_HOST')
     name = 'pychrondvc'
 
-uri = 'mysql+pymysql://{}:{}@{}/{}?connect_timeout=3'.format(user, pwd, host, name)
+uri = 'mysql+pymysql://{0}:{1}@{2}/{3}?connect_timeout=3'.format(user, pwd, host, name)
 app.config['SQLALCHEMY_DATABASE_URI'] = uri
 
 # ============= EOF =============================================
